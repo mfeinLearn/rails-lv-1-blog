@@ -1,0 +1,130 @@
+I want to have a bunch of blogs posts
+
+and you should be able to CRUD those posts
+
+GET /posts -> show an index of all my blog posts
+GET /posts/:id -> show a particular blog post by id
+GET /posts/new -> a form for new blog posts
+POST /posts -> submitting the new blog post
+GET /posts/:id/edit -> editing a blog posts
+
+
+OUTSIDE IN:
+URLS
+Routes
+Controller Actions
+Models
+Database
+Views
+
+Creating models:
+rails generate - create skeleton code that you need for something
+
+---
+
+After migration migrate - have to apply this to be able to create the
+table.
+
+^ is a Rake task that will read all of your unapplied migrations and actually
+apply them
+
+----
+GENERATERS:
+1. Migration generators - generates a migration
+2. rails generate model
+-------
+
+-------
+A hiarical structure for generation:
+
+Scaffold -> Controller, routes, model, migration, views
+Resource -> Controller, routes, model, migration
+
+Model -> the model and the migration for the model
+Migration -> Just the migration
+-------
+
+-------
+Steps:
+
+1. Plan out some URLs for the feature I'm building
+2. Ask, does my database need to change? Yes, I need a new table.
+3. If I need a new table, do I have that model? No, so use the model generator
+4. After i generate a new model and migrate my DB, I want to play with it in console.
+
+rails console
+- read all of my environment code
+- load up irb session
+
+-----
+
+ActiveRecord Conventions: - this is the convention that helps activerecord find what they need to find
+
+Table name: lowercase plural name of model - posts
+Model filename: singular lowercase (underscored) - post.rb
+Class name for model: singular camelcase - Post
+
+table name: authors
+model filename: author.rb
+class name: Author
+
+-----
+
+A Rails route maps a URL to a Controller and Action
+                                Class        Method
+-----
+
+GET /about -> StaticController#about
+GET /team -> StaticController#team
+
+
+-------
+
+A. The Rails Application Layout
+B. Migration Generator
+C. Model Generator
+D. Controller Generator
+E. Controllers being classes and actions being methods.
+F. routes
+G. Mapping a URL to a Controller Action through routes
+H. View Rendering
+I. Implicit Rendering
+J. Explicit Rendering
+
+Loading instances and data in a Controller action
+using instances and data in a view
+link_to helpers and generating HTML / links in Rails
+
+ActionView is a frame work in rails that helps you to write html better - it writes html.
+
+rake routes
+- routing table is the output
+- describing to me all of the routes I have their name their method their url and their mapping
+
+Prefix        Verb  URI  Pattern               Controller#Action
+hello_world   GET   /hello_world(.:format)     posts#home
+name of route its verb is a get verb and its url pattern is /hello_world and it is mapped to posts#home
+
+-------
+get '/about' => 'static#about', :as => :about
+
+- note: rails will use this as a default route name
+  but you can explicitlly use another name for this route by using the following: :as => :about
+
+'/about' -- this is the definition of that route; this is used as the default route name
+:as => :about -- this gives it its name
+
+<%= link_to("About Page", about_path) %>
+about_path - route helper
+----
+
+When ever a route has a route variable the helper method that you would use
+to generate that route accepts an argument for each variable in this route
+
+app.post_path(1)  => "/posts/1"
+app.post_path(12345)  => "/posts/12345"
+
+p = Post.first
+app.post_path(p.id) -> When you have a post instance you can gets its id by doing the following:
+it will use that p.id to fill out that route variable
+ => "/posts/1"

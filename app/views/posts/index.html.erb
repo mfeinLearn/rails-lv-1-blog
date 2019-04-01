@@ -1,0 +1,24 @@
+<h1>My Blog Posts</h1>
+
+<ol>
+<% @posts.each do |post| %>
+<li>
+  <!-- Using HTML to generate a link -->
+  <!-- Least Abstract -->
+  <!-- <a href="/posts/<%= post.id %>"><%= post.title %> -->
+  <!-- Using Rails to generate a link -->
+  <%# More abstract, using link_to but still hardcoding URL  %>
+  <%= link_to(post.title, "/posts/#{post.id}") %>
+  <%# More abstract, hard coding .id for post %>
+  <%= link_to(post.title,post_path(post.id)) %>
+  <%# More abstract, not explicitlly calling id on post %>
+  <%= link_to(post.title,post_path(post)) %>
+  <%#= link_to(post.title, post) %>
+
+</li>
+<% end %>
+</ol>
+
+
+<%= link_to("About Page", about_path) %>
+<%#= link_to("Special Page", malcome_special_route_path) %>
